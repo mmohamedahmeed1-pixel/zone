@@ -4,10 +4,8 @@ import { useCart } from './CartContext';
 
 const Navbar = () => {
   const { cartCount, darkMode, toggleDarkMode } = useCart();
-  // حالة التحكم في فتح القائمة للموبايل
   const [isOpen, setIsOpen] = useState(false);
 
-  // تثبيت الهوية الرياضية الفخمة باللون الأسود دائماً بناءً على طلبك
   const navBg = '#111111'; 
   const textColor = '#ffffff'; 
   const borderColor = '2px solid #CCFF00'; 
@@ -15,7 +13,6 @@ const Navbar = () => {
   return (
     <nav style={{ ...styles.navbarContainer, backgroundColor: navBg }}>
       
-      {/* الجهة اليمنى: الهامبرغر والشعار */}
       <div style={styles.rightSection}>
         <button 
           onClick={() => setIsOpen(!isOpen)} 
@@ -34,7 +31,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* روابط التنقل المحدثة ديناميكياً */}
       <ul className={`nav-menu ${isOpen ? 'open' : ''}`} style={styles.navLinks}>
         <li><Link to="/" onClick={() => setIsOpen(false)} style={{ ...styles.link, color: textColor }}>الرئيسية</Link></li>
         <li><Link to="/proudects" onClick={() => setIsOpen(false)} style={{ ...styles.link, color: textColor }}>المتجر</Link></li>
@@ -42,7 +38,6 @@ const Navbar = () => {
         <li><Link to="/service" onClick={() => setIsOpen(false)} style={{ ...styles.link, color: textColor }}>الخدمات</Link></li>
       </ul>
 
-      {/* الجهة اليسرى: الأزرار والتفاعل */}
       <div style={styles.actionsContainer}>
         <button onClick={toggleDarkMode} style={{ ...styles.themeBtn, color: textColor }}>
           {darkMode ? '🌙 وضع داكن' : '☀️ وضع مضيء'}
@@ -59,21 +54,18 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* حقن الـ CSS الإعلامي الحاسم لإلغاء التداخل وعزل القائمة الجانبية */}
       <style>{`
-        /* الإعدادات الافتراضية للشاشات الكبيرة */
         .nav-menu {
           display: flex !important;
         }
 
-        /* تعديلات الموبايل والشاشات الصغيرة حاسمة لمنع الطفو والتداخل */
         @media (max-width: 768px) {
           .menu-toggle-btn {
-            display: block !important; /* إظهار زر الهامبرغر للموبايل بشكل آمن */
+            display: block !important;
           }
 
           .nav-menu {
-            display: none !important; /* إخفاء تماماً في الحالة العادية */
+            display: none !important;
             position: absolute !important;
             top: 70px !important;
             right: 0 !important;
@@ -87,7 +79,6 @@ const Navbar = () => {
             border-bottom: 2px solid #CCFF00 !important;
           }
           
-          /* إظهار القائمة فقط عندما تكون حالة isOpen صحيحة */
           .nav-menu.open {
             display: flex !important;
           }
@@ -104,7 +95,6 @@ const Navbar = () => {
             border-bottom: 1px solid #222 !important;
           }
 
-          /* إخفاء نص "السلة" الداخلي للمحافظة على المساحة الكافية للأزرار */
           .cart-text-class {
             display: none !important;
           }
@@ -141,7 +131,7 @@ const styles = {
     cursor: 'pointer',
     outline: 'none',
     padding: 0,
-    display: 'none' // يتم إظهاره عبر كلاس .menu-toggle-btn في الـ Media Query
+    display: 'none'
   },
   logoContainer: { display: 'flex', alignItems: 'center' },
   logoLink: { textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' },
