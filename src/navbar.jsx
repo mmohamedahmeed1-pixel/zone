@@ -19,6 +19,7 @@ const Navbar = () => {
       <div style={styles.rightSection}>
         <button 
           onClick={() => setIsOpen(!isOpen)} 
+          className="menu-toggle-btn"
           style={{ ...styles.menuToggle, color: textColor }}
           aria-label="Toggle navigation"
         >
@@ -44,7 +45,7 @@ const Navbar = () => {
       {/* الجهة اليسرى: الأزرار والتفاعل */}
       <div style={styles.actionsContainer}>
         <button onClick={toggleDarkMode} style={{ ...styles.themeBtn, color: textColor }}>
-  {darkMode ? '🌙 وضع داكن' : '☀️ وضع مضيء'}
+          {darkMode ? '🌙 وضع داكن' : '☀️ وضع مضيء'}
         </button>
 
         <Link to="/login" style={{ ...styles.iconLink, color: textColor }}>
@@ -53,7 +54,7 @@ const Navbar = () => {
 
         <Link to="/check/cart" style={{ ...styles.cartButton, border: borderColor, color: textColor }}>
           <span style={styles.cartIcon}>🛒</span>
-          <span style={styles.cartText}>السلة</span>
+          <span className="cart-text-class" style={styles.cartText}>السلة</span>
           <span style={styles.cartCount}>{cartCount}</span>
         </Link>
       </div>
@@ -67,6 +68,10 @@ const Navbar = () => {
 
         /* تعديلات الموبايل والشاشات الصغيرة حاسمة لمنع الطفو والتداخل */
         @media (max-width: 768px) {
+          .menu-toggle-btn {
+            display: block !important; /* إظهار زر الهامبرغر للموبايل بشكل آمن */
+          }
+
           .nav-menu {
             display: none !important; /* إخفاء تماماً في الحالة العادية */
             position: absolute !important;
@@ -115,16 +120,14 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0 4%',
-    position: 'sticky',
-    top: 0,
     zIndex: 1000,
     direction: 'rtl',
     fontFamily: 'sans-serif',
     height: '70px',
     boxSizing: 'border-box',
     borderBottom: '2px solid #CCFF00',
-    // أهم سطر لمنع تداخل القوائم تحت المحتوى
-    position: 'relative'
+    position: 'sticky',
+    top: 0
   },
   rightSection: {
     display: 'flex',
@@ -138,7 +141,7 @@ const styles = {
     cursor: 'pointer',
     outline: 'none',
     padding: 0,
-    display: 'none' // يتم التحكم بظهوره عبر الـ Media Queries بالأسفل
+    display: 'none' // يتم إظهاره عبر كلاس .menu-toggle-btn في الـ Media Query
   },
   logoContainer: { display: 'flex', alignItems: 'center' },
   logoLink: { textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' },
@@ -199,10 +202,5 @@ const styles = {
     fontWeight: 'bold'
   }
 };
-
-// تفعيل ظهور زر الهامبرغر في الكائنات البرمجية للشاشات الصغيرة تلقائياً
-if (typeof window !== 'undefined' && window.innerWidth <= 768) {
-  styles.menuToggle.display = 'block';
-}
 
 export default Navbar;
